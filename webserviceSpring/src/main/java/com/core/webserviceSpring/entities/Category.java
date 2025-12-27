@@ -3,7 +3,9 @@ package com.core.webserviceSpring.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity
@@ -15,6 +17,8 @@ public class Category implements Serializable {
     private Long id;
     private String categoryName;
 
+    private final Set<Product> products = new HashSet<Product>();
+
     public Category() {}
 
     public Category(Long id, String categoryName) {
@@ -22,22 +26,27 @@ public class Category implements Serializable {
         this.categoryName = categoryName;
     }
 
+    // Getters
     public String getCategoryName() {
         return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
     }
 
     public Long getId() {
         return id;
     }
 
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    // Setters
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
-
 
     @Override
     public boolean equals(Object o) {
