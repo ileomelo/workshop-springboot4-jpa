@@ -1,5 +1,6 @@
 package com.core.webserviceSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,6 +18,8 @@ public class Category implements Serializable {
     private Long id;
     private String categoryName;
 
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")
     private final Set<Product> products = new HashSet<Product>();
 
     public Category() {}
