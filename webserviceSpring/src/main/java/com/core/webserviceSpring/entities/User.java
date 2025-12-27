@@ -1,8 +1,11 @@
 package com.core.webserviceSpring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +20,10 @@ public class User implements Serializable {
     private String email;
     private String password;
 
+    @OneToMany(mappedBy = "client")
+    @JsonIgnore
+    private List<Order> orders =  new ArrayList<Order>();
+
     public User() {}
 
     public User(Long id, String firstName, String lastName, String email, String password) {
@@ -28,6 +35,8 @@ public class User implements Serializable {
     }
 
     // Getters
+    public List<Order> getOrders() {return orders;}
+
     public String getFirstName() {
         return firstName;
     }
@@ -76,4 +85,6 @@ public class User implements Serializable {
     public int hashCode() {
         return Objects.hashCode(id);
     }
+
+
 }
